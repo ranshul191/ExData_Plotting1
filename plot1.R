@@ -1,17 +1,12 @@
 ##read data
-data<- read.table("household_power_consumption.txt", sep =";", header = TRUE, na.strings = "?", stringsAsFactors = FALSE)
-
-## convert date and time formats
-data$Time <- as.POSIXct(paste(data$Date, data$Time), format = "%d/%m/%Y %H:%M:%S")
-data$Date <-as.Date(data$Date, format = "%d/%m/%Y")
-
+Power_data<- read.table("household_power_consumption.txt", sep =";", header = TRUE, na.strings = "?", stringsAsFactors = FALSE)
 
 ##create subdata for further use
-subdata <- subset(data, Date>="2007-02-01" & Date <="2007-02-02")
+subPower_data <- subset(Power_data, Date=="1/2/2007"|Date=="2/2/2007")
 
 ##create a png file 
-png("plot1.png", height = 400, width = 400)
+png("plot1.png", height = 480, width = 480)
 
 ##create a histogram
-hist(subdata$Global_active_power, main = "Global Active Power", xlab = "Global Active Power (kilowatts)", ylab="Frequency", col="red")
+hist(subPower_data$Global_active_power, main = "Global Active Power", xlab = "Global Active Power (kilowatts)", ylab="Frequency", col="red")
 dev.off()
